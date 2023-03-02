@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       secondLastCharacter = str.substring( str.length - 2, str.length - 1 );
     }
 
-    //if last character is a number, or the last character is a decimal character, then we call the function recursively until we finish this number
+    //if last character is a number, or the last character is a decimal character, then we call the function recursively until we finish this number.
     if( _isNumeric(lastCharacter) || lastCharacter == ".") {
       _changeSign( str.substring(0, str.length - 1) );
 
