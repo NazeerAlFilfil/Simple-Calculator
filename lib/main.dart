@@ -375,16 +375,17 @@ class _MyHomePageState extends State<MyHomePage> {
         if(double.parse(result) == double.parse(result).toInt()) {
           _result = double.parse(result).truncate().toString();
         } else {
-          //count the number of decimal places
+
           int decimalCount = _countDecimalPlaces(result);
+          int intCount = _countSignificantDigits(result);
 
           //if the decimal count is bigger than 8, round it to 8 decimals, otherwise, write it as it is
-          if(decimalCount > 8) {
-            _result = double.parse(result).toStringAsFixed(8);
-          } else if(decimalCount <= 8 && _countSignificantDigits(result) <= 15 - decimalCount) {
+          if(decimalCount <= 8 && intCount <= 15 - decimalCount) {
             _result = double.parse(result).toStringAsFixed(decimalCount);
-          } else {
+          } else if(8 + intCount <= 15) {
             _result = double.parse(result).toStringAsFixed(8);
+          } else {
+            _result = double.parse(result).toStringAsExponential(8);
           }
         }
       }
