@@ -367,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
       String result = '${expression.evaluate(EvaluationType.REAL, contextModel)}';
 
       //if digits count is equal to or bigger than 15, then just write result in scientific notations to avoid overflow, or rounding shenanigans
-      if( _countSignificantDigits(result) + _countDecimalPlaces(result) >= 15) {
+      if( _countSignificantDigits(result) >= 15) {
         _result = double.parse(result).toStringAsExponential(8);
 
       } else {
@@ -381,8 +381,10 @@ class _MyHomePageState extends State<MyHomePage> {
           //if the decimal count is bigger than 8, round it to 8 decimals, otherwise, write it as it is
           if(decimalCount > 8) {
             _result = double.parse(result).toStringAsFixed(8);
-          } else {
+          } else if(decimalCount <= 8 && _countSignificantDigits(result) <= 15 - decimalCount) {
             _result = double.parse(result).toStringAsFixed(decimalCount);
+          } else {
+            _result = double.parse(result).toStringAsFixed(8);
           }
         }
       }
