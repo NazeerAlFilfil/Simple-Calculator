@@ -77,6 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
     if( _isNumeric(lastCharacter) || lastCharacter == ".") {
       _changeSign( str.substring(0, str.length - 1) );
 
+      //if last character is ")", then insert "×(-"
+    } else if(lastCharacter == ")") {
+      String secondHalf = _expression.substring(str.length, _expression.length);
+      _expression = "$str×(-$secondHalf";
+
       //if last character is not a number neither a "-" sign, then insert "(-"
     } else if(lastCharacter != "-") {
       //insert "(-"
