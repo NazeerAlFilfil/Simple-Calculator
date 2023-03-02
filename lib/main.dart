@@ -379,7 +379,8 @@ class _MyHomePageState extends State<MyHomePage> {
           int decimalCount = _countDecimalPlaces(result);
           int intCount = _countSignificantDigits(result);
 
-          //if the decimal count is bigger than 8, round it to 8 decimals, otherwise, write it as it is
+          //TODO: correct comments
+          // if the decimal count is bigger than 8, round it to 8 decimals, otherwise, write it as it is
           if(decimalCount <= 8 && intCount <= 15 - decimalCount) {
             _result = double.parse(result).toStringAsFixed(decimalCount);
           } else if(8 + intCount <= 15) {
